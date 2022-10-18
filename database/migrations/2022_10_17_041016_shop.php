@@ -13,16 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('customers', function (Blueprint $table) {
-            $table->bigIncrements('customer_id');
+
+        Schema::create('shop', function (Blueprint $table) {
+            $table->bigIncrements('shop_id');
             $table->string('name');
             $table->string('method');
-    
+
            $table->bigInteger('suser_id')->unsigned();
             $table->foreign('suser_id')
-                  ->references('customer_id')
+                  ->references('shop_id')
                   ->on('shop_users')->onDelete('cascade');
-    
+
             $table->timestamps();
         });
     }
@@ -34,7 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customers');
-
+        Schema::dropIfExists('shop');
     }
 };
